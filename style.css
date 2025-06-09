@@ -195,6 +195,18 @@ body {
     color: var(--accent);
 }
 
+[data-theme="dark"] .feed h3 {
+    color: #66b3ff;
+}
+
+[data-theme="dark"] .feed h3 a {
+    color: #66b3ff;
+}
+
+[data-theme="dark"] .feed h3 a:hover {
+    color: #80c7ff;
+}
+
 .feed .rss {
     color: var(--primary-text);
     font-size: 0.98rem;
