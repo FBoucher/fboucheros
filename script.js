@@ -35,6 +35,11 @@ const feeds = [
         id: 'feed-yt-cloud', 
         url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UChFOuhUf12hIVEdcnaSUNzA', 
         type: 'yt' 
+    },
+    {
+        id: 'feed-yt-behindmycloud',
+        url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCzX9-dTqz-kG5q1-uys_NGw', 
+        type: 'yt' 
     }
 ];
 
