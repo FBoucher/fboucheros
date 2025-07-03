@@ -47,7 +47,7 @@ const feeds = [
         type: 'yt' 
     },
     {
-        id: 'feed-yt-playlist-fr',
+        id: 'feed-yt-external-playlist-fr',
         url: 'https://www.youtube.com/feeds/videos.xml?playlist_id=PLl0dy42acVd_vwIUN2y3LvDq8VOUIj6Dk', 
         type: 'yt' 
     }
