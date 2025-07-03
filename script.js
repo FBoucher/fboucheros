@@ -40,6 +40,11 @@ const feeds = [
         id: 'feed-yt-behindmycloud',
         url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCzX9-dTqz-kG5q1-uys_NGw', 
         type: 'yt' 
+    },
+    {
+        id: 'feed-yt-playlist',
+        url: 'https://www.youtube.com/feeds/videos.xml?playlist_id=PL4NfFPd0l1UYpeQxjGdmKjNRoXru2u1TI', 
+        type: 'yt' 
     }
 ];
 
