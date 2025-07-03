@@ -45,6 +45,11 @@ const feeds = [
         id: 'feed-yt-playlist',
         url: 'https://www.youtube.com/feeds/videos.xml?playlist_id=PL4NfFPd0l1UYpeQxjGdmKjNRoXru2u1TI', 
         type: 'yt' 
+    },
+    {
+        id: 'feed-yt-playlist-fr',
+        url: 'https://www.youtube.com/feeds/videos.xml?playlist_id=PLl0dy42acVd_vwIUN2y3LvDq8VOUIj6Dk', 
+        type: 'yt' 
     }
 ];
 
