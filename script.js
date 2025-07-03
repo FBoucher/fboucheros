@@ -42,7 +42,7 @@ const feeds = [
         type: 'yt' 
     },
     {
-        id: 'feed-yt-playlist',
+        id: 'feed-yt-external-playlist',
         url: 'https://www.youtube.com/feeds/videos.xml?playlist_id=PL4NfFPd0l1UYpeQxjGdmKjNRoXru2u1TI', 
         type: 'yt' 
     },
