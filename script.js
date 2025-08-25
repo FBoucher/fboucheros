@@ -23,7 +23,7 @@ const feeds = [
     },
     { 
         id: 'feed-cloud', 
-        url: 'https://www.cloudenfrancais.com/feed.atom', 
+        url: 'https://www.cloudenfrancais.com/feed.rss', 
         type: 'rss' 
     },
     { 
