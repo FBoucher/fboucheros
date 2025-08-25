@@ -18,12 +18,12 @@ function toggleTheme() {
 const feeds = [
     { 
         id: 'feed-blog', 
-        url: 'https://frankysnotes.com/feeds/posts/default?alt=rss', 
+        url: 'https://frankysnotes.com/feeds/posts/default', 
         type: 'rss' 
     },
     { 
         id: 'feed-cloud', 
-        url: 'https://www.cloudenfrancais.com/feed.rss', 
+        url: 'https://www.cloudenfrancais.com/feed.atom', 
         type: 'rss' 
     },
     { 
@@ -53,20 +53,110 @@ const feeds = [
     }
 ];
 
-// YouTube thumbnail helper function
+// YouTube thumbnail helper function with fallbacks
 function getYouTubeThumbnail(link) {
+    let videoId = null;
+    
     // Extract video ID from YouTube link
     const match = link.match(/[?&]v=([^&]+)/);
     if (match && match[1]) {
-        return `https://img.youtube.com/vi/${match[1]}/mqdefault.jpg`;
+        videoId = match[1];
     }
     
     // For youtu.be short links
     const short = link.match(/youtu\.be\/([^?&]+)/);
     if (short && short[1]) {
-        return `https://img.youtube.com/vi/${short[1]}/mqdefault.jpg`;
+        videoId = short[1];
     }
     
+    // For YouTube Shorts URLs (e.g., youtube.com/shorts/videoId)
+    const shorts = link.match(/\/shorts\/([^?&]+)/);
+    if (shorts && shorts[1]) {
+        videoId = shorts[1];
+    }
+    
+    if (!videoId) {
+        return null;
+    }
+    
+    // Return high quality thumbnail - works for both regular videos and Shorts
+    // YouTube generates thumbnails for all videos including Shorts
+    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+}
+
+// Function to create thumbnail with fallback handling
+function createYouTubeThumbnailElement(videoId, link) {
+    const thumbnailQualities = [
+        'hqdefault.jpg',    // High quality (480x360)
+        'mqdefault.jpg',    // Medium quality (320x180)
+        'default.jpg'       // Default quality (120x90)
+    ];
+    
+    let currentQuality = 0;
+    
+    function tryNextThumbnail(img) {
+        if (currentQuality < thumbnailQualities.length - 1) {
+            currentQuality++;
+            img.src = `https://img.youtube.com/vi/${videoId}/${thumbnailQualities[currentQuality]}`;
+        }
+    }
+    
+    const img = document.createElement('img');
+    img.src = `https://img.youtube.com/vi/${videoId}/${thumbnailQualities[0]}`;
+    img.alt = 'Video thumbnail';
+    img.style.width = '70px';
+    img.style.height = '40px';
+    img.style.objectFit = 'cover';
+    img.style.borderRadius = '4px';
+    img.onerror = () => tryNextThumbnail(img);
+    
+    const linkElement = document.createElement('a');
+    linkElement.href = link;
+    linkElement.target = '_blank';
+    linkElement.rel = 'noopener';
+    linkElement.appendChild(img);
+    
+    return linkElement;
+}
+
+// Extract thumbnail from RSS content
+function getRSSContentThumbnail(item) {
+    // Try to get thumbnail from various RSS/Atom fields
+    if (item.thumbnail) {
+        return item.thumbnail;
+    }
+    
+    // Check for Atom-style media thumbnail
+    if (item['media:thumbnail'] && item['media:thumbnail'].url) {
+        return item['media:thumbnail'].url;
+    }
+    
+    // Check for media:content (common in Atom feeds)
+    if (item['media:content'] && item['media:content'].url && item['media:content'].type && item['media:content'].type.startsWith('image/')) {
+        return item['media:content'].url;
+    }
+    
+    // Check for enclosure (RSS style)
+    if (item.enclosure && item.enclosure.link && item.enclosure.type && item.enclosure.type.startsWith('image/')) {
+        return item.enclosure.link;
+    }
+    
+    // Try to extract image from content/description
+    const content = item.content || item.description || '';
+    const imgMatch = content.match(/<img[^>]+src=['"]([^'"]+)['"][^>]*>/i);
+    if (imgMatch && imgMatch[1]) {
+        return imgMatch[1];
+    }
+    
+    // Look for WordPress featured image pattern (often in Atom feeds)
+    const wpFeaturedMatch = content.match(/wp-content\/uploads\/[^'">\s]+\.(jpg|jpeg|png|gif|webp)/i);
+    if (wpFeaturedMatch && wpFeaturedMatch[0]) {
+        // Construct full URL if it's a relative path
+        const imgUrl = wpFeaturedMatch[0].startsWith('http') ? wpFeaturedMatch[0] : `https://www.cloudenfrancais.com/${wpFeaturedMatch[0]}`;
+        return imgUrl;
+    }
+    
+    // Return null if no image found (no placeholder)
     return null;
 }
 
@@ -83,11 +173,27 @@ function formatDate(dateString) {
 function createFeedItem(item, type) {
     if (type === 'yt') {
         const thumb = getYouTubeThumbnail(item.link);
+        
+        // Extract video ID for advanced thumbnail handling
+        let videoId = null;
+        const matchVideo = item.link.match(/[?&]v=([^&]+)/);
+        const matchShort = item.link.match(/youtu\.be\/([^?&]+)/);
+        const matchShorts = item.link.match(/\/shorts\/([^?&]+)/);
+        
+        if (matchVideo && matchVideo[1]) {
+            videoId = matchVideo[1];
+        } else if (matchShort && matchShort[1]) {
+            videoId = matchShort[1];
+        } else if (matchShorts && matchShorts[1]) {
+            videoId = matchShorts[1];
+        }
+        
         return `
             <div style="margin-bottom: 0.7em; display: flex; align-items: center; gap: 0.7em;">
                 ${thumb ? `<a href="${item.link}" target="_blank" rel="noopener">
                     <img src="${thumb}" alt="Video thumbnail" 
-                         style="width: 70px; height: 40px; object-fit: cover; border-radius: 4px;">
+                         style="width: 70px; height: 40px; object-fit: cover; border-radius: 4px;"
+                         onerror="this.src='https://img.youtube.com/vi/${videoId}/mqdefault.jpg'; this.onerror=function(){this.src='https://img.youtube.com/vi/${videoId}/default.jpg';};">
                 </a>` : ''}
                 <div>
                     <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
@@ -97,13 +203,30 @@ function createFeedItem(item, type) {
             </div>
         `;
     } else {
-        return `
-            <div style="margin-bottom: 0.7em;">
-                <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
-                <br>
-                <span style="font-size: 0.85em; color: gray;">${formatDate(item.pubDate)}</span>
-            </div>
-        `;
+        const thumb = getRSSContentThumbnail(item);
+        if (thumb) {
+            return `
+                <div style="margin-bottom: 0.7em; display: flex; align-items: center; gap: 0.7em;">
+                    <a href="${item.link}" target="_blank" rel="noopener">
+                        <img src="${thumb}" alt="Blog post thumbnail" 
+                             style="width: 70px; height: 40px; object-fit: cover; border-radius: 4px;">
+                    </a>
+                    <div>
+                        <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
+                        <br>
+                        <span style="font-size: 0.85em; color: gray;">${formatDate(item.pubDate)}</span>
+                    </div>
+                </div>
+            `;
+        } else {
+            return `
+                <div style="margin-bottom: 0.7em;">
+                    <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
+                    <br>
+                    <span style="font-size: 0.85em; color: gray;">${formatDate(item.pubDate)}</span>
+                </div>
+            `;
+        }
     }
 }
 
