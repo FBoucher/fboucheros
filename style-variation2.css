@@ -169,7 +169,7 @@ body {
 }
 
 .header::after {
-    content: 'Technical Content Creator & Cloud Enthusiast';
+    content: 'Developer Advocate & Technical Content Creator';
     display: block;
     font-size: 1.25rem;
     color: var(--secondary-text);
