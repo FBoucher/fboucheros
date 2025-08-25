@@ -121,39 +121,62 @@ function createYouTubeThumbnailElement(videoId, link) {
 
 // Extract thumbnail from RSS content
 function getRSSContentThumbnail(item) {
+    // Helper function to convert relative URLs to absolute URLs for Cloud en Français
+    function makeAbsoluteUrl(url, baseUrl = 'https://www.cloudenfrancais.com') {
+        if (!url) return null;
+        if (url.startsWith('http')) return url;
+        if (url.startsWith('/')) return `${baseUrl}${url}`;
+        return url;
+    }
+    
     // Try to get thumbnail from various RSS/Atom fields
-    if (item.thumbnail) {
-        return item.thumbnail;
+    if (item.thumbnail && item.thumbnail.trim()) {
+        return makeAbsoluteUrl(item.thumbnail);
     }
     
     // Check for Atom-style media thumbnail
     if (item['media:thumbnail'] && item['media:thumbnail'].url) {
-        return item['media:thumbnail'].url;
+        return makeAbsoluteUrl(item['media:thumbnail'].url);
     }
     
     // Check for media:content (common in Atom feeds)
     if (item['media:content'] && item['media:content'].url && item['media:content'].type && item['media:content'].type.startsWith('image/')) {
-        return item['media:content'].url;
+        return makeAbsoluteUrl(item['media:content'].url);
     }
     
-    // Check for enclosure (RSS style)
-    if (item.enclosure && item.enclosure.link && item.enclosure.type && item.enclosure.type.startsWith('image/')) {
-        return item.enclosure.link;
-    }
-    
-    // Try to extract image from content/description
+    // Try to extract image from content/description first (more relevant than enclosure)
     const content = item.content || item.description || '';
     const imgMatch = content.match(/<img[^>]+src=['"]([^'"]+)['"][^>]*>/i);
     if (imgMatch && imgMatch[1]) {
-        return imgMatch[1];
+        const imgUrl = makeAbsoluteUrl(imgMatch[1]);
+        // Skip very small images (likely icons) and prefer larger content images
+        if (imgUrl && !imgUrl.includes('icon') && !imgUrl.includes('logo') && !imgUrl.endsWith('logo3.png')) {
+            return imgUrl;
+        }
+    }
+    
+    // Check for enclosure (RSS style) - use as fallback
+    if (item.enclosure && item.enclosure.link) {
+        // Check if it's an image enclosure or if type indicates image
+        if (!item.enclosure.type || item.enclosure.type.startsWith('image/')) {
+            const enclosureUrl = makeAbsoluteUrl(item.enclosure.link);
+            // Only use enclosure if it's clearly an image or we have no other options
+            if (enclosureUrl && (enclosureUrl.match(/\.(jpg|jpeg|png|gif|webp)$/i) || item.enclosure.type)) {
+                return enclosureUrl;
+            }
+        }
     }
     
     // Look for WordPress featured image pattern (often in Atom feeds)
     const wpFeaturedMatch = content.match(/wp-content\/uploads\/[^'">\s]+\.(jpg|jpeg|png|gif|webp)/i);
     if (wpFeaturedMatch && wpFeaturedMatch[0]) {
-        // Construct full URL if it's a relative path
-        const imgUrl = wpFeaturedMatch[0].startsWith('http') ? wpFeaturedMatch[0] : `https://www.cloudenfrancais.com/${wpFeaturedMatch[0]}`;
-        return imgUrl;
+        return makeAbsoluteUrl(wpFeaturedMatch[0]);
+    }
+    
+    // Look for any /content/images/ pattern (specific to Cloud en Français)
+    const contentImageMatch = content.match(/\/content\/images\/[^'">\s]+\.(jpg|jpeg|png|gif|webp)/i);
+    if (contentImageMatch && contentImageMatch[0]) {
+        return makeAbsoluteUrl(contentImageMatch[0]);
     }
     
     // Return null if no image found (no placeholder)
@@ -209,7 +232,8 @@ function createFeedItem(item, type) {
                 <div style="margin-bottom: 0.7em; display: flex; align-items: center; gap: 0.7em;">
                     <a href="${item.link}" target="_blank" rel="noopener">
                         <img src="${thumb}" alt="Blog post thumbnail" 
-                             style="width: 70px; height: 40px; object-fit: cover; border-radius: 4px;">
+                             style="width: 70px; height: 40px; object-fit: cover; border-radius: 4px;"
+                             onerror="this.style.display='none'; this.parentNode.style.display='none';">
                     </a>
                     <div>
                         <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
