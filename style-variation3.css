@@ -1,0 +1,689 @@
+/* Variation 3: Bold Design with Parallax Scrolling */
+/* CSS Custom Properties - Bold Contrasts */
+:root {
+    --primary-text: #1a1a1a;
+    --secondary-text: #4a5568;
+    --accent: #e53e3e;
+    --accent-hover: #c53030;
+    --accent-secondary: #ff6b6b;
+    --accent-tertiary: #4ecdc4;
+    --strip-bg: #000000;
+    --strip-text: #ffffff;
+    --card-bg: #ffffff;
+    --background: #ffffff;
+    --background-alt: #f7fafc;
+    --border: #e2e8f0;
+    --shadow-bold: rgba(229, 62, 62, 0.2);
+    --shadow-dark: rgba(0, 0, 0, 0.3);
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --gradient-bold: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-accent: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    --gradient-dark: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+}
+
+[data-theme="dark"] {
+    --primary-text: #ffffff;
+    --secondary-text: #a0aec0;
+    --accent: #ff6b6b;
+    --accent-hover: #ff5252;
+    --accent-secondary: #e53e3e;
+    --accent-tertiary: #4ecdc4;
+    --strip-bg: #000000;
+    --strip-text: #ffffff;
+    --card-bg: #1a202c;
+    --background: #0f172a;
+    --background-alt: #1a202c;
+    --border: #2d3748;
+    --shadow-bold: rgba(255, 107, 107, 0.3);
+    --shadow-dark: rgba(0, 0, 0, 0.5);
+    --shadow-light: rgba(0, 0, 0, 0.2);
+    --gradient-bold: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+    --gradient-accent: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    --gradient-dark: linear-gradient(135deg, #1a202c 0%, #0f172a 100%);
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--primary-text);
+    background: var(--background);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+    overflow-x: hidden;
+}
+
+/* Bold Strip with Fixed Position */
+.strip {
+    background: var(--strip-bg);
+    color: var(--strip-text);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    backdrop-filter: blur(20px);
+    border-bottom: 2px solid var(--accent);
+    box-shadow: 0 4px 20px var(--shadow-dark);
+}
+
+.strip::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(229, 62, 62, 0.1) 25%, 
+        rgba(78, 205, 196, 0.1) 75%, 
+        transparent 100%);
+    animation: stripGlow 4s ease-in-out infinite;
+}
+
+@keyframes stripGlow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+}
+
+.strip-name a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.strip-name a:hover {
+    color: var(--accent-secondary);
+    text-shadow: 0 0 20px var(--accent);
+    transform: scale(1.05);
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.social-icons a {
+    color: var(--strip-text);
+    font-size: 1.25rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    padding: 0.75rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
+}
+
+.social-icons a:hover {
+    background: var(--accent);
+    border-color: var(--accent-secondary);
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 10px 25px var(--shadow-bold);
+}
+
+.theme-toggle {
+    background: var(--accent);
+    border: 2px solid var(--accent-secondary);
+    color: var(--strip-text);
+    padding: 0.75rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    z-index: 1;
+}
+
+.theme-toggle:hover {
+    background: var(--accent-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--shadow-bold);
+}
+
+/* Parallax Header */
+.header {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--gradient-dark);
+    margin-top: 0;
+}
+
+.parallax-bg {
+    position: absolute;
+    top: -20%;
+    left: -20%;
+    width: 140%;
+    height: 140%;
+    background-image: url('./images/frank_boucher_bonjour-hi.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: grayscale(20%) contrast(1.2);
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.parallax-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(229, 62, 62, 0.8) 0%,
+        rgba(78, 205, 196, 0.6) 50%,
+        rgba(102, 126, 234, 0.8) 100%
+    );
+    animation: colorShift 8s ease-in-out infinite;
+}
+
+@keyframes colorShift {
+    0%, 100% { 
+        background: linear-gradient(135deg, rgba(229, 62, 62, 0.8) 0%, rgba(78, 205, 196, 0.6) 50%, rgba(102, 126, 234, 0.8) 100%);
+    }
+    50% { 
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(229, 62, 62, 0.6) 50%, rgba(78, 205, 196, 0.8) 100%);
+    }
+}
+
+.header-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    transform: translateZ(0);
+}
+
+.header img {
+    display: none;
+}
+
+.header h1 {
+    font-size: 4.5rem;
+    color: #ffffff;
+    margin: 0;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    text-shadow: 
+        0 4px 8px rgba(0,0,0,0.5),
+        0 8px 16px rgba(0,0,0,0.3);
+    animation: floatIn 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+}
+
+.header-subtitle {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    animation: floatIn 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+    text-transform: uppercase;
+}
+
+@keyframes floatIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Dynamic About Strip */
+.about-strip {
+    background: var(--gradient-accent);
+    color: #ffffff;
+    padding: 4rem 2rem;
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.8;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.025em;
+}
+
+.about-strip::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: dotMatrix 20s linear infinite;
+}
+
+@keyframes dotMatrix {
+    0% { transform: translateX(0) translateY(0); }
+    100% { transform: translateX(50px) translateY(50px); }
+}
+
+.about-strip a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 800;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.about-strip a:hover {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Container with Padding for Fixed Header */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    position: relative;
+}
+
+/* Bold Grid Layout */
+.bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    margin-top: 3rem;
+}
+
+.content-column h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 3rem;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.content-column:first-child h2 {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.content-column:last-child h2 {
+    background: linear-gradient(135deg, var(--accent-tertiary) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.content-column h2::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 3px;
+}
+
+/* Bold Feed Cards with Parallax */
+.feed {
+    background: var(--card-bg);
+    margin: 2.5rem 0;
+    padding: 3rem;
+    border-radius: 20px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    width: 100%;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 10px 30px var(--shadow-light),
+        0 0 0 1px var(--border);
+}
+
+.feed::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--gradient-accent);
+}
+
+.feed::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, var(--accent) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0;
+    transition: all 0.6s ease;
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.feed:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--accent);
+    box-shadow: 
+        0 20px 60px var(--shadow-bold),
+        0 0 0 3px var(--accent);
+}
+
+.feed:hover::after {
+    opacity: 0.05;
+}
+
+.feed h3 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+}
+
+.feed h3 a {
+    color: var(--primary-text);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.feed h3 a:hover {
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent);
+}
+
+.feed .rss {
+    color: var(--secondary-text);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+}
+
+.feed .rss a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.feed .rss a:hover {
+    color: var(--accent-hover);
+    border-bottom-color: var(--accent);
+}
+
+.feed .rss span {
+    color: var(--secondary-text);
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* Bold Footer */
+.footer {
+    background: var(--strip-bg);
+    color: var(--strip-text);
+    text-align: center;
+    padding: 4rem 2rem;
+    font-size: 1.2rem;
+    margin-top: 6rem;
+    position: relative;
+    overflow: hidden;
+    font-weight: 600;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, var(--accent) 0%, var(--accent-tertiary) 100%);
+    opacity: 0.1;
+}
+
+.footer a {
+    color: var(--accent);
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    z-index: 1;
+}
+
+.footer a:hover {
+    color: var(--accent-secondary);
+    text-shadow: 0 0 15px var(--accent);
+    transform: translateY(-2px);
+}
+
+/* Parallax Scroll Effects */
+.parallax-element {
+    will-change: transform;
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 1024px) {
+    .bottom {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+    
+    .container {
+        padding: 3rem 1.5rem;
+    }
+    
+    .header h1 {
+        font-size: 3.5rem;
+    }
+    
+    .content-column h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .strip {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        position: relative;
+    }
+    
+    .header {
+        height: 80vh;
+        margin-top: 0;
+    }
+    
+    .parallax-bg {
+        background-attachment: scroll;
+    }
+    
+    .header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .header-subtitle {
+        font-size: 1.25rem;
+    }
+    
+    .about-strip {
+        font-size: 1.25rem;
+        padding: 2.5rem 1rem;
+    }
+    
+    .content-column h2 {
+        font-size: 2rem;
+    }
+    
+    .feed {
+        padding: 2rem;
+        margin: 1.5rem 0;
+    }
+    
+    .social-icons {
+        justify-content: center;
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .header-subtitle {
+        font-size: 1rem;
+    }
+    
+    .about-strip {
+        font-size: 1.1rem;
+        padding: 2rem 1rem;
+    }
+    
+    .feed {
+        padding: 1.5rem;
+    }
+    
+    .content-column h2 {
+        font-size: 1.75rem;
+    }
+    
+    .container {
+        padding: 2rem 1rem;
+    }
+    
+    .bottom {
+        gap: 3rem;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-alt);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gradient-accent);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* Accessibility Focus Styles */
+button:focus,
+a:focus {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* Loading States with Bold Animation */
+.rss:empty {
+    position: relative;
+    min-height: 80px;
+}
+
+.rss:empty::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    background: linear-gradient(90deg, 
+        var(--border) 25%, 
+        var(--accent) 50%, 
+        var(--border) 75%);
+    background-size: 200% 100%;
+    animation: boldLoading 1.5s infinite;
+    border-radius: 6px;
+}
+
+.rss:empty::before {
+    content: '';
+    position: absolute;
+    top: 35px;
+    left: 0;
+    width: 60%;
+    height: 20px;
+    background: linear-gradient(90deg, 
+        var(--border) 25%, 
+        var(--accent-tertiary) 50%, 
+        var(--border) 75%);
+    background-size: 200% 100%;
+    animation: boldLoading 1.5s infinite 0.3s;
+    border-radius: 6px;
+}
+
+@keyframes boldLoading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}

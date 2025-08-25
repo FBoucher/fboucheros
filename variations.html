@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FBoucheros - Beautiful Blog Variations</title>
+    <meta name="description" content="Choose from 3 beautiful variations of Frank Boucher's blog - Modern Gradients, Minimalist Clean, or Bold Parallax designs.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        :root {
+            --primary: #3182ce;
+            --secondary: #059669;
+            --accent: #e53e3e;
+            --text: #2d3748;
+            --bg: #ffffff;
+            --card-bg: #f7fafc;
+            --border: #e2e8f0;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .variations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .variation-card {
+            background: var(--bg);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .variation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .variation-card.modern::before {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .variation-card.minimal::before {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        }
+
+        .variation-card.bold::before {
+            background: linear-gradient(135deg, #e53e3e 0%, #ff6b6b 100%);
+        }
+
+        .variation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .variation-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .modern .variation-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .minimal .variation-icon {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        }
+
+        .bold .variation-icon {
+            background: linear-gradient(135deg, #e53e3e 0%, #ff6b6b 100%);
+        }
+
+        .variation-card h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .variation-card p {
+            color: #4a5568;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            margin-right: 0.75rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+        }
+
+        .btn-modern {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .btn-minimal {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        }
+
+        .btn-bold {
+            background: linear-gradient(135deg, #e53e3e 0%, #ff6b6b 100%);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .original-link {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .original-link a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .original-link a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .variations {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .variation-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Frank Boucher's Beautiful Blog</h1>
+            <p>Choose your favorite design variation</p>
+        </div>
+
+        <div class="variations">
+            <div class="variation-card modern">
+                <div class="variation-icon">
+                    <i class="bi bi-palette"></i>
+                </div>
+                <h2>Modern Gradients</h2>
+                <p>A vibrant design featuring beautiful gradients, enhanced typography, and smooth animations.</p>
+                <ul class="feature-list">
+                    <li>Modern gradient color palette</li>
+                    <li>Enhanced typography with Inter font</li>
+                    <li>Smooth hover animations</li>
+                    <li>Beautiful card design with shadows</li>
+                    <li>Custom scrollbar styling</li>
+                </ul>
+                <a href="variation1.html" class="btn btn-modern">View Modern</a>
+            </div>
+
+            <div class="variation-card minimal">
+                <div class="variation-icon">
+                    <i class="bi bi-circle"></i>
+                </div>
+                <h2>Minimalist Clean</h2>
+                <p>A clean, elegant design with soft colors, circular profile photo, and refined spacing.</p>
+                <ul class="feature-list">
+                    <li>Clean minimalist aesthetics</li>
+                    <li>Circular profile photo design</li>
+                    <li>Soft pastel color palette</li>
+                    <li>Enhanced spacing and typography</li>
+                    <li>Subtle hover effects</li>
+                </ul>
+                <a href="variation2.html" class="btn btn-minimal">View Minimal</a>
+            </div>
+
+            <div class="variation-card bold">
+                <div class="variation-icon">
+                    <i class="bi bi-lightning"></i>
+                </div>
+                <h2>Bold Parallax</h2>
+                <p>A striking design with bold colors, parallax scrolling effects, and dynamic animations.</p>
+                <ul class="feature-list">
+                    <li>Bold contrast color scheme</li>
+                    <li>Parallax scrolling background</li>
+                    <li>Full-screen hero section</li>
+                    <li>Dynamic animations and effects</li>
+                    <li>Fixed navigation with blur</li>
+                </ul>
+                <a href="variation3.html" class="btn btn-bold">View Parallax</a>
+            </div>
+        </div>
+
+        <div class="original-link">
+            <a href="index.html">← View Original Design</a>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scroll behavior and entrance animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.variation-card');
+            
+            // Add entrance animations with delay
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
