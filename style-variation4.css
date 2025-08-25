@@ -1,49 +1,49 @@
-/* Variation 4: Natural Outdoor Design */
-/* CSS Custom Properties - Earth Tones & Nature Palette */
+/* Variation 4: Tech-Focused Mountain Design */
+/* CSS Custom Properties - Blue Tones & Tech Palette */
 :root {
     --primary-text: #2e2e2e;
-    --secondary-text: #5d4e37;
-    --accent: #2e7d32;
-    --accent-hover: #1b5e20;
-    --accent-secondary: #8bc34a;
-    --accent-tertiary: #ff8f00;
-    --strip-bg: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%);
+    --secondary-text: #374151;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --accent-secondary: #3b82f6;
+    --accent-tertiary: #f59e0b;
+    --strip-bg: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
     --strip-text: #ffffff;
     --card-bg: #fefefe;
-    --background: #f1f8e9;
-    --background-alt: #e8f5e8;
-    --border: #c8e6c9;
-    --shadow-light: rgba(46, 125, 50, 0.1);
-    --shadow-medium: rgba(46, 125, 50, 0.15);
-    --shadow-heavy: rgba(46, 125, 50, 0.25);
-    --wood-brown: #8d6e63;
-    --stone-gray: #78909c;
-    --earth-beige: #d7ccc8;
-    --forest-green: #1b5e20;
-    --sky-blue: #81c784;
+    --background: #f0f7ff;
+    --background-alt: #e0f2fe;
+    --border: #bfdbfe;
+    --shadow-light: rgba(37, 99, 235, 0.1);
+    --shadow-medium: rgba(37, 99, 235, 0.15);
+    --shadow-heavy: rgba(37, 99, 235, 0.25);
+    --tech-blue: #1e40af;
+    --steel-gray: #64748b;
+    --cloud-white: #f8fafc;
+    --deep-blue: #1e3a8a;
+    --sky-accent: #0ea5e9;
 }
 
 [data-theme="dark"] {
-    --primary-text: #e8f5e8;
-    --secondary-text: #c8e6c9;
-    --accent: #66bb6a;
-    --accent-hover: #81c784;
-    --accent-secondary: #aed581;
-    --accent-tertiary: #ffb74d;
-    --strip-bg: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
-    --strip-text: #e8f5e8;
-    --card-bg: #2e2e2e;
-    --background: #1a1a1a;
-    --background-alt: #2e2e2e;
-    --border: #4a5d4a;
-    --shadow-light: rgba(102, 187, 106, 0.2);
-    --shadow-medium: rgba(102, 187, 106, 0.3);
-    --shadow-heavy: rgba(102, 187, 106, 0.4);
-    --wood-brown: #a1887f;
-    --stone-gray: #90a4ae;
-    --earth-beige: #5d4e37;
-    --forest-green: #2e7d32;
-    --sky-blue: #4db6ac;
+    --primary-text: #e0f2fe;
+    --secondary-text: #bfdbfe;
+    --accent: #60a5fa;
+    --accent-hover: #93c5fd;
+    --accent-secondary: #3b82f6;
+    --accent-tertiary: #fbbf24;
+    --strip-bg: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    --strip-text: #e0f2fe;
+    --card-bg: #1e293b;
+    --background: #0f172a;
+    --background-alt: #1e293b;
+    --border: #334155;
+    --shadow-light: rgba(96, 165, 250, 0.2);
+    --shadow-medium: rgba(96, 165, 250, 0.3);
+    --shadow-heavy: rgba(96, 165, 250, 0.4);
+    --tech-blue: #3b82f6;
+    --steel-gray: #94a3b8;
+    --cloud-white: #374151;
+    --deep-blue: #2563eb;
+    --sky-accent: #0ea5e9;
 }
 
 /* Base Styles */
@@ -408,14 +408,9 @@ body {
 }
 
 .feed h3 a::before {
-    content: '🌲';
+    content: '🔹';
     margin-right: 0.5rem;
-    animation: treeGrow 2s ease-in-out infinite alternate;
-}
-
-@keyframes treeGrow {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
+    color: var(--accent);
 }
 
 /* RSS Content */

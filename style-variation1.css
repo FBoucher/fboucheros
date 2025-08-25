@@ -1,35 +1,35 @@
 /* Variation 1: Modern Gradient Design */
-/* CSS Custom Properties - Modern Ocean Blue/Teal Palette */
+/* CSS Custom Properties - Sophisticated Purple/Pink Gradient Palette */
 :root {
     --primary-text: #2d3748;
-    --accent: #0ea5e9;
-    --accent-hover: #0284c7;
-    --strip-bg: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+    --accent: #8b5cf6;
+    --accent-hover: #7c3aed;
+    --strip-bg: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
     --strip-text: #ffffff;
     --card-bg: #ffffff;
     --shadow-light: rgba(0, 0, 0, 0.05);
     --shadow-medium: rgba(0, 0, 0, 0.1);
     --shadow-heavy: rgba(0, 0, 0, 0.15);
-    --gradient-primary: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
-    --gradient-secondary: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-    --gradient-accent: linear-gradient(135deg, #14b8a6 0%, #0891b2 100%);
+    --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+    --gradient-secondary: linear-gradient(135deg, #c084fc 0%, #e879f9 100%);
+    --gradient-accent: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
     --border-radius: 16px;
     --border-radius-large: 24px;
 }
 
 [data-theme="dark"] {
     --primary-text: #e2e8f0;
-    --accent: #38bdf8;
-    --accent-hover: #7dd3fc;
-    --strip-bg: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    --accent: #c084fc;
+    --accent-hover: #ddd6fe;
+    --strip-bg: linear-gradient(135deg, #4c1d95 0%, #581c87 100%);
     --strip-text: #e2e8f0;
-    --card-bg: #1e293b;
+    --card-bg: #1e1b4b;
     --shadow-light: rgba(0, 0, 0, 0.2);
     --shadow-medium: rgba(0, 0, 0, 0.3);
     --shadow-heavy: rgba(0, 0, 0, 0.4);
-    --gradient-primary: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-    --gradient-secondary: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
-    --gradient-accent: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+    --gradient-primary: linear-gradient(135deg, #4c1d95 0%, #581c87 100%);
+    --gradient-secondary: linear-gradient(135deg, #6b21a8 0%, #7e22ce 100%);
+    --gradient-accent: linear-gradient(135deg, #be185d 0%, #be123c 100%);
 }
 
 /* Base Styles */
@@ -43,7 +43,7 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.7;
     color: var(--primary-text);
-    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 400;
     letter-spacing: -0.025em;

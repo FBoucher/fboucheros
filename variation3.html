@@ -119,11 +119,12 @@
             
             function updateParallax() {
                 const scrolled = window.pageYOffset;
-                const rate = scrolled * -0.3; // Less aggressive parallax
+                const rate = scrolled * -0.15; // Much less aggressive parallax
                 
                 parallaxElements.forEach(element => {
-                    const speed = element.dataset.speed || 0.05; // Reduced default speed
-                    const yPos = -(scrolled * speed);
+                    const speed = element.dataset.speed || 0.02; // Much reduced default speed
+                    // Only allow downward movement to prevent covering titles
+                    const yPos = Math.max(0, scrolled * speed);
                     element.style.transform = `translateY(${yPos}px)`;
                 });
                 

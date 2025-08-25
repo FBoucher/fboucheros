@@ -344,6 +344,10 @@ body {
     letter-spacing: -0.05em;
     text-transform: uppercase;
     position: relative;
+    z-index: 10;
+    background: var(--background);
+    padding: 1rem 0;
+    margin-top: 2rem;
 }
 
 .content-column:first-child h2 {

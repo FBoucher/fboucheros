@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FBoucheros - Frank Boucher (Variation 4: Natural Outdoors)</title>
+    <title>FBoucheros - Frank Boucher (Variation 4: Tech Mountain)</title>
     <meta name="description" content="Frank Boucher - Passionate technical content creator sharing videos, posts, and talks in English and French.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,17 +38,10 @@
             <img src="./images/frank_boucher_bonjour-hi.jpg" alt="Frank Boucher">
             <h1>Bonjour, Hi! I'm Frank</h1>
             <div class="header-subtitle">
-                <i class="bi bi-tree"></i>
-                Tech Explorer & Nature Enthusiast
-                <i class="bi bi-mountains"></i>
-            </div>
-            <div class="nature-badges">
-                <span class="badge"><i class="bi bi-sunrise"></i> Hiker</span>
-                <span class="badge"><i class="bi bi-water"></i> Kayaker</span>
-                <span class="badge"><i class="bi bi-compass"></i> Camper</span>
+                Tech Explorer & Content Creator
             </div>
             <div style="position: absolute; top: 1rem; right: 1rem; z-index: 20;">
-                <a href="variations.html" style="color: rgba(255,255,255,0.9); text-decoration: none; font-size: 0.9rem; background: rgba(46, 125, 50, 0.8); padding: 0.5rem 1rem; border-radius: 20px; backdrop-filter: blur(10px); transition: all 0.3s ease;">
+                <a href="variations.html" style="color: rgba(255,255,255,0.9); text-decoration: none; font-size: 0.9rem; background: rgba(37, 99, 235, 0.8); padding: 0.5rem 1rem; border-radius: 20px; backdrop-filter: blur(10px); transition: all 0.3s ease;">
                     ✨ Try Other Designs
                 </a>
             </div>
@@ -56,12 +49,12 @@
     </div>
 
     <div class="about-strip">
-        I'm a passionate technical content creator who finds inspiration in both code and nature. When I'm not crafting 
+        I'm a passionate technical content creator focused on cloud technology and software development. I love crafting 
         <a href="https://youtube.com/@fboucheros" title="See my videos" target="_blank">videos</a>, 
-        <a href="https://www.frankysnotes.com/search/label/post" title="See my posts" target="_blank">posts</a>, or giving 
-        <a href="https://www.frankysnotes.com/p/blog-page.html" title="See my talks" target="_blank">talks</a>, 
-        you'll find me hiking trails, paddling lakes, or camping under the stars. 
-        Ready for an adventure? Reach out on 
+        <a href="https://www.frankysnotes.com/search/label/post" title="See my posts" target="_blank">posts</a>, and giving 
+        <a href="https://www.frankysnotes.com/p/blog-page.html" title="See my talks" target="_blank">talks</a> 
+        about modern development practices and cloud solutions. 
+        Ready to connect? Reach out on 
         <a href="https://linkedin.com/in/fboucheros" target="_blank" rel="noopener">LinkedIn</a>, 
         <a href="https://instagram.com/fboucheros" target="_blank" rel="noopener">Instagram</a>, or 
         <a href="https://bsky.app/profile/fboucheros.bsky.social" target="_blank" rel="noopener">BlueSky</a>!
@@ -113,11 +106,6 @@
     </div>
 
     <footer class="footer">
-        <div class="footer-nature">
-            <span><i class="bi bi-tree-fill"></i></span>
-            <span><i class="bi bi-water"></i></span>
-            <span><i class="bi bi-mountains"></i></span>
-        </div>
         <div>
             <a href="https://github.com/fboucher" target="_blank" rel="noopener">GitHub</a> |
             <a href="https://twitter.com/fboucheros" target="_blank" rel="noopener">Twitter/X</a> |
@@ -133,13 +121,8 @@
 
     <script src="script.js"></script>
     <script>
-        // Gentle floating animations for nature elements
+        // Mountain parallax animation
         document.addEventListener('DOMContentLoaded', function() {
-            const badges = document.querySelectorAll('.badge');
-            badges.forEach((badge, index) => {
-                badge.style.animationDelay = `${index * 0.2}s`;
-            });
-            
             // Parallax effect for mountain background
             window.addEventListener('scroll', () => {
                 const scrolled = window.pageYOffset;
