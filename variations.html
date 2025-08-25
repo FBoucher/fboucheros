@@ -66,7 +66,7 @@
 
         .variations {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
         }
@@ -101,7 +101,11 @@
         }
 
         .variation-card.bold::before {
-            background: linear-gradient(135deg, #e53e3e 0%, #ff6b6b 100%);
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+        }
+
+        .variation-card.natural::before {
+            background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
         }
 
         .variation-card:hover {
@@ -122,15 +126,19 @@
         }
 
         .modern .variation-icon {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
         }
 
         .minimal .variation-icon {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            background: linear-gradient(135deg, #e74c3c 0%, #f39c12 100%);
         }
 
         .bold .variation-icon {
-            background: linear-gradient(135deg, #e53e3e 0%, #ff6b6b 100%);
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+        }
+
+        .natural .variation-icon {
+            background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
         }
 
         .variation-card h2 {
@@ -180,15 +188,19 @@
         }
 
         .btn-modern {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
         }
 
         .btn-minimal {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            background: linear-gradient(135deg, #e74c3c 0%, #f39c12 100%);
         }
 
         .btn-bold {
-            background: linear-gradient(135deg, #e53e3e 0%, #ff6b6b 100%);
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+        }
+
+        .btn-natural {
+            background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
         }
 
         .btn:hover {
@@ -246,48 +258,64 @@
                 <div class="variation-icon">
                     <i class="bi bi-palette"></i>
                 </div>
-                <h2>Modern Gradients</h2>
-                <p>A vibrant design featuring beautiful gradients, enhanced typography, and smooth animations.</p>
+                <h2>Modern Ocean</h2>
+                <p>A vibrant design featuring beautiful ocean blue gradients, enhanced typography, and smooth animations.</p>
                 <ul class="feature-list">
-                    <li>Modern gradient color palette</li>
+                    <li>Modern ocean blue gradient palette</li>
                     <li>Enhanced typography with Inter font</li>
                     <li>Smooth hover animations</li>
                     <li>Beautiful card design with shadows</li>
                     <li>Custom scrollbar styling</li>
                 </ul>
-                <a href="variation1.html" class="btn btn-modern">View Modern</a>
+                <a href="variation1.html" class="btn btn-modern">View Ocean</a>
             </div>
 
             <div class="variation-card minimal">
                 <div class="variation-icon">
                     <i class="bi bi-circle"></i>
                 </div>
-                <h2>Minimalist Clean</h2>
-                <p>A clean, elegant design with soft colors, circular profile photo, and refined spacing.</p>
+                <h2>Warm Coral</h2>
+                <p>A clean, elegant design with warm coral colors, circular profile photo, and refined spacing.</p>
                 <ul class="feature-list">
-                    <li>Clean minimalist aesthetics</li>
+                    <li>Warm coral and sage aesthetics</li>
                     <li>Circular profile photo design</li>
-                    <li>Soft pastel color palette</li>
+                    <li>Sophisticated color palette</li>
                     <li>Enhanced spacing and typography</li>
                     <li>Subtle hover effects</li>
                 </ul>
-                <a href="variation2.html" class="btn btn-minimal">View Minimal</a>
+                <a href="variation2.html" class="btn btn-minimal">View Coral</a>
             </div>
 
             <div class="variation-card bold">
                 <div class="variation-icon">
                     <i class="bi bi-lightning"></i>
                 </div>
-                <h2>Bold Parallax</h2>
-                <p>A striking design with bold colors, parallax scrolling effects, and dynamic animations.</p>
+                <h2>Blue Parallax</h2>
+                <p>A striking design with blue tones, improved parallax scrolling effects, and dynamic animations.</p>
                 <ul class="feature-list">
-                    <li>Bold contrast color scheme</li>
-                    <li>Parallax scrolling background</li>
+                    <li>Blue tones with orange accents</li>
+                    <li>Improved parallax scrolling</li>
                     <li>Full-screen hero section</li>
                     <li>Dynamic animations and effects</li>
                     <li>Fixed navigation with blur</li>
                 </ul>
                 <a href="variation3.html" class="btn btn-bold">View Parallax</a>
+            </div>
+
+            <div class="variation-card natural">
+                <div class="variation-icon">
+                    <i class="bi bi-tree"></i>
+                </div>
+                <h2>Natural Outdoors</h2>
+                <p>An earth-toned design inspired by nature, perfect for outdoor enthusiasts who love hiking and camping.</p>
+                <ul class="feature-list">
+                    <li>Earth tones and natural colors</li>
+                    <li>Mountain and nature graphics</li>
+                    <li>Outdoor activity badges</li>
+                    <li>Nature-inspired animations</li>
+                    <li>Rustic yet modern aesthetics</li>
+                </ul>
+                <a href="variation4.html" class="btn btn-natural">View Nature</a>
             </div>
         </div>
 

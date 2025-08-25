@@ -1,35 +1,35 @@
 /* Variation 1: Modern Gradient Design */
-/* CSS Custom Properties - Modern Blue/Teal Palette */
+/* CSS Custom Properties - Modern Ocean Blue/Teal Palette */
 :root {
     --primary-text: #2d3748;
-    --accent: #3182ce;
-    --accent-hover: #2c5282;
-    --strip-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --accent: #0ea5e9;
+    --accent-hover: #0284c7;
+    --strip-bg: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
     --strip-text: #ffffff;
     --card-bg: #ffffff;
     --shadow-light: rgba(0, 0, 0, 0.05);
     --shadow-medium: rgba(0, 0, 0, 0.1);
     --shadow-heavy: rgba(0, 0, 0, 0.15);
-    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --gradient-primary: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+    --gradient-secondary: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    --gradient-accent: linear-gradient(135deg, #14b8a6 0%, #0891b2 100%);
     --border-radius: 16px;
     --border-radius-large: 24px;
 }
 
 [data-theme="dark"] {
     --primary-text: #e2e8f0;
-    --accent: #63b3ed;
-    --accent-hover: #90cdf4;
-    --strip-bg: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    --accent: #38bdf8;
+    --accent-hover: #7dd3fc;
+    --strip-bg: linear-gradient(135deg, #1e293b 0%, #334155 100%);
     --strip-text: #e2e8f0;
-    --card-bg: #2d3748;
+    --card-bg: #1e293b;
     --shadow-light: rgba(0, 0, 0, 0.2);
     --shadow-medium: rgba(0, 0, 0, 0.3);
     --shadow-heavy: rgba(0, 0, 0, 0.4);
-    --gradient-primary: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-    --gradient-secondary: linear-gradient(135deg, #553c9a 0%, #ee4a62 100%);
-    --gradient-accent: linear-gradient(135deg, #2b6cb0 0%, #065f46 100%);
+    --gradient-primary: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    --gradient-secondary: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+    --gradient-accent: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
 }
 
 /* Base Styles */
