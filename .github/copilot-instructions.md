@@ -7,10 +7,7 @@ Always reference these instructions first and fallback to search or bash command
 ## Working Effectively
 
 - Serve the website locally:
-  - **Python HTTP Server**: `cd /path/to/repo && python3 -m http.server 8000` -- starts immediately, no timeout needed
-  - **Node.js http-server**: `npx http-server . -p 8000` -- starts immediately, no timeout needed  
   - **Simple file serving**: Any static file server works - no build process required
-- View the website: Open `http://localhost:8000` in browser
 - **NO BUILD PROCESS REQUIRED** - This is pure static HTML/CSS/JavaScript
 - **NO DEPENDENCIES** - No package.json, no npm install needed
 - **NO COMPILATION** - Files are served directly as-is
@@ -21,21 +18,17 @@ Always reference these instructions first and fallback to search or bash command
 - **Core validation scenarios after making changes:**
   1. **Theme Toggle Test**: Click the theme button (moon icon), verify the page switches between light and dark themes
   2. **Social Media Links Test**: Click at least 2-3 social media links, verify they open in new tabs with correct URLs
-  3. **RSS Feed Display Test**: Check that RSS feed sections show either content or "Unable to load feed" (expected in sandboxed environments)
+  3. **RSS/ Atom Feed Display Test**: Check that RSS feed sections show either content or "Unable to load feed" (expected in sandboxed environments)
   4. **Responsive Design Test**: Resize browser window to mobile size, verify layout adapts properly
   5. **Header Image Test**: Verify the hero image loads and displays correctly
 - **Take screenshots** when making visual changes to document the impact
-- **RSS Feeds Note**: In sandboxed/testing environments, RSS feeds from api.rss2json.com will fail due to network restrictions. This is EXPECTED behavior - feeds will work in production environments with internet access.
+- **RSS/ Atom Feeds Note**: In sandboxed/testing environments, RSS feeds from api.rss2json.com will fail due to network restrictions. This is EXPECTED behavior - feeds will work in production environments with internet access.
 
 ## Manual Testing Commands
 
 **All commands below have been validated to work:**
 
 ```bash
-# Start local server (choose one):
-python3 -m http.server 8000
-# OR
-npx http-server . -p 8000
 
 # Test RSS API availability (will fail in sandboxed environments):
 curl -I "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ffrankysnotes.com%2Ffeeds%2Fposts%2Fdefault%3Falt%3Drss"
