@@ -54,11 +54,7 @@ jobs:
             );
             
             const previewUrl = `${{ steps.deployment.outputs.page_url }}pr-${{ github.event.number }}/`;
-            const body = `📖 **Preview deployed!**
-            
-You can preview the changes from this PR at: ${previewUrl}
-
-This preview will be updated automatically when you push new commits to this PR.`;
+            const body = `📖 **Preview deployed!**\\n\\nYou can preview the changes from this PR at: ${previewUrl}\\n\\nThis preview will be updated automatically when you push new commits to this PR.`;
 
             if (botComment) {
               await github.rest.issues.updateComment({

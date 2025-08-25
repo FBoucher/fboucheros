@@ -29,9 +29,7 @@ jobs:
               comment.body.includes('📖 Preview deployed')
             );
             
-            const body = `📖 **Preview cleanup**
-            
-The preview environment for this PR has been cleaned up since the PR was closed.`;
+            const body = '📖 **Preview cleanup**\n\nThe preview environment for this PR has been cleaned up since the PR was closed.';
 
             if (botComment) {
               await github.rest.issues.updateComment({
