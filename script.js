@@ -121,14 +121,6 @@ function createYouTubeThumbnailElement(videoId, link) {
 
 // Extract thumbnail from RSS content
 function getRSSContentThumbnail(item) {
-    // Helper function to convert relative URLs to absolute URLs for Cloud en Français
-    function makeAbsoluteUrl(url, baseUrl = 'https://www.cloudenfrancais.com') {
-        if (!url) return null;
-        if (url.startsWith('http')) return url;
-        if (url.startsWith('/')) return `${baseUrl}${url}`;
-        return url;
-    }
-    
     // Try to get thumbnail from various RSS/Atom fields
     if (item.thumbnail && item.thumbnail.trim()) {
         return makeAbsoluteUrl(item.thumbnail);
@@ -192,16 +184,27 @@ function formatDate(dateString) {
     }
 }
 
+// Helper function to convert relative URLs to absolute URLs
+function makeAbsoluteUrl(url, baseUrl = 'https://www.cloudenfrancais.com') {
+    if (!url) return null;
+    if (url.startsWith('http')) return url;
+    if (url.startsWith('/')) return `${baseUrl}${url}`;
+    return url;
+}
+
 // Create feed item HTML
 function createFeedItem(item, type) {
+    // Convert relative URLs to absolute URLs for Cloud en Français feed
+    const absoluteLink = makeAbsoluteUrl(item.link);
+    
     if (type === 'yt') {
-        const thumb = getYouTubeThumbnail(item.link);
+        const thumb = getYouTubeThumbnail(absoluteLink);
         
         // Extract video ID for advanced thumbnail handling
         let videoId = null;
-        const matchVideo = item.link.match(/[?&]v=([^&]+)/);
-        const matchShort = item.link.match(/youtu\.be\/([^?&]+)/);
-        const matchShorts = item.link.match(/\/shorts\/([^?&]+)/);
+        const matchVideo = absoluteLink.match(/[?&]v=([^&]+)/);
+        const matchShort = absoluteLink.match(/youtu\.be\/([^?&]+)/);
+        const matchShorts = absoluteLink.match(/\/shorts\/([^?&]+)/);
         
         if (matchVideo && matchVideo[1]) {
             videoId = matchVideo[1];
@@ -213,13 +216,13 @@ function createFeedItem(item, type) {
         
         return `
             <div style="margin-bottom: 0.7em; display: flex; align-items: center; gap: 0.7em;">
-                ${thumb ? `<a href="${item.link}" target="_blank" rel="noopener">
+                ${thumb ? `<a href="${absoluteLink}" target="_blank" rel="noopener">
                     <img src="${thumb}" alt="Video thumbnail" 
                          style="width: 70px; height: 40px; object-fit: cover; border-radius: 4px;"
                          onerror="this.src='https://img.youtube.com/vi/${videoId}/mqdefault.jpg'; this.onerror=function(){this.src='https://img.youtube.com/vi/${videoId}/default.jpg';};">
                 </a>` : ''}
                 <div>
-                    <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
+                    <a href="${absoluteLink}" target="_blank" rel="noopener">${item.title}</a>
                     <br>
                     <span style="font-size: 0.85em; color: gray;">${formatDate(item.pubDate)}</span>
                 </div>
@@ -230,13 +233,13 @@ function createFeedItem(item, type) {
         if (thumb) {
             return `
                 <div style="margin-bottom: 0.7em; display: flex; align-items: center; gap: 0.7em;">
-                    <a href="${item.link}" target="_blank" rel="noopener">
+                    <a href="${absoluteLink}" target="_blank" rel="noopener">
                         <img src="${thumb}" alt="Blog post thumbnail" 
                              style="width: 70px; height: 40px; object-fit: cover; border-radius: 4px;"
                              onerror="this.style.display='none'; this.parentNode.style.display='none';">
                     </a>
                     <div>
-                        <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
+                        <a href="${absoluteLink}" target="_blank" rel="noopener">${item.title}</a>
                         <br>
                         <span style="font-size: 0.85em; color: gray;">${formatDate(item.pubDate)}</span>
                     </div>
@@ -245,7 +248,7 @@ function createFeedItem(item, type) {
         } else {
             return `
                 <div style="margin-bottom: 0.7em;">
-                    <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
+                    <a href="${absoluteLink}" target="_blank" rel="noopener">${item.title}</a>
                     <br>
                     <span style="font-size: 0.85em; color: gray;">${formatDate(item.pubDate)}</span>
                 </div>
