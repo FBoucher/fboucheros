@@ -1,0 +1,392 @@
+/* Bio Page Styles - Shared between variations */
+
+/* CSS Custom Properties - Match main site theme */
+:root {
+    --primary-text: #2c3e50;
+    --secondary-text: #5d6d7e;
+    --accent: #e74c3c;
+    --accent-hover: #c0392b;
+    --accent-light: #fadbd8;
+    --strip-bg: #ffffff;
+    --strip-text: #2c3e50;
+    --card-bg: #ffffff;
+    --background: #fefefe;
+    --background-alt: #f8f9fa;
+    --border: #d5dbdb;
+    --border-light: #ecf0f1;
+    --shadow-xs: rgba(231, 76, 60, 0.05);
+    --shadow-sm: rgba(231, 76, 60, 0.08);
+    --shadow-md: rgba(231, 76, 60, 0.12);
+    --shadow-lg: rgba(231, 76, 60, 0.18);
+}
+
+[data-theme="dark"] {
+    --primary-text: #ecf0f1;
+    --secondary-text: #bdc3c7;
+    --accent: #ff6b6b;
+    --accent-hover: #ff5252;
+    --accent-light: #2c3e50;
+    --strip-bg: #2c3e50;
+    --strip-text: #ecf0f1;
+    --card-bg: #34495e;
+    --background: #1a252f;
+    --background-alt: #2c3e50;
+    --border: #5d6d7e;
+    --border-light: #34495e;
+    --shadow-xs: rgba(255, 107, 107, 0.1);
+    --shadow-sm: rgba(255, 107, 107, 0.15);
+    --shadow-md: rgba(255, 107, 107, 0.2);
+    --shadow-lg: rgba(255, 107, 107, 0.25);
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.65;
+    color: var(--primary-text);
+    background: var(--background);
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+/* Strip Header */
+.strip {
+    background: var(--strip-bg);
+    color: var(--strip-text);
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 3px var(--shadow-xs);
+}
+
+.strip-name a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.125rem;
+    transition: all 0.2s ease;
+}
+
+.strip-name a:hover {
+    color: var(--accent-hover);
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.social-icons a {
+    color: var(--secondary-text);
+    font-size: 1.125rem;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: transparent;
+    border: 2px solid var(--border);
+    color: var(--primary-text);
+    padding: 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.125rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: rotate(15deg);
+}
+
+/* Language Toggle */
+.language-toggle {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 0.25rem;
+}
+
+.language-toggle button {
+    background: transparent;
+    border: none;
+    color: var(--secondary-text);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.language-toggle button.active {
+    background: var(--accent);
+    color: white;
+}
+
+.language-toggle button:hover:not(.active) {
+    background: var(--background-alt);
+}
+
+/* Bio Container */
+.bio-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+/* Photo Section */
+.photo-section {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.photo-wrapper {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.bio-photo {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 8px solid var(--card-bg);
+    box-shadow: 0 20px 40px var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.bio-photo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 25px 50px var(--shadow-lg);
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    margin-top: 1rem;
+}
+
+.download-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px var(--shadow-md);
+}
+
+/* Bio Content */
+.bio-content {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px var(--shadow-sm);
+}
+
+.bio-content h2 {
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.bio-content p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+/* Language Content Toggle */
+.lang-content {
+    display: none;
+}
+
+.lang-content.active {
+    display: block;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--background-alt);
+    color: var(--secondary-text);
+    font-size: 0.95rem;
+    border-top: 1px solid var(--border);
+}
+
+.footer a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer a:hover {
+    color: var(--accent-hover);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .strip {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .bio-container {
+        padding: 2rem 1rem;
+    }
+    
+    .bio-photo {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .social-icons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .bio-photo {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .bio-content {
+        padding: 1.5rem;
+    }
+}
+
+/* Variation 1 Specific Styles - Card Grid Layout */
+.bio-v1 .bio-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.bio-v1 .bio-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+.bio-v1 .bio-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px var(--shadow-md);
+}
+
+.bio-v1 .bio-card h3 {
+    font-size: 1.25rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.bio-v1 .bio-card p {
+    line-height: 1.8;
+}
+
+/* Variation 2 Specific Styles - Single Column Layout */
+.bio-v2 .bio-section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px var(--shadow-sm);
+    border-left: 4px solid var(--accent);
+}
+
+.bio-v2 .bio-section h3 {
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.bio-v2 .bio-section p {
+    line-height: 1.9;
+    font-size: 1.05rem;
+}
+
+.bio-v2 .bio-section.highlight {
+    background: linear-gradient(135deg, var(--accent-light) 0%, var(--card-bg) 100%);
+}
+
+/* Navigation Links */
+.nav-links {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+}
+
+.nav-links a {
+    display: inline-block;
+    margin: 0 1rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+/* Awards & Recognition Section */
+.awards {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--background-alt);
+    border-radius: 8px;
+}
+
+.award-icon {
+    font-size: 1.5rem;
+}
