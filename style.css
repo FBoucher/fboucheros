@@ -305,6 +305,14 @@ body {
     color: var(--accent);
 }
 
+.feed-description {
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0 0 1.25rem 0;
+    font-style: italic;
+}
+
 .feed .rss {
     color: var(--secondary-text);
     font-size: 0.95rem;
